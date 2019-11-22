@@ -29,33 +29,45 @@ namespace SaladChef.Core
         ///</summary>///
         public OnTimeOver onTimeOver;
 
+        private int _waitMultiplier = 1;
+
         public float TimeLeft { get => _timeLeft; }
         public float WaitingTIme { get => _waitingTime; }
 
         private void Start()
         {
+            print("Timer::Start");
+
             if(_image == null)
                 throw new System.Exception("Cannot find waiting timer image...");
 
             onTimeOver = new OnTimeOver();
         }
 
-        private void Update()
-        {
-            _timeLeft -= Time.deltaTime;
-            _image.fillAmount = _timeLeft / _waitingTime;
-
-            if(_timeLeft < 0)
-                onTimeOver.Invoke();
-        }
-
         public void SetWatingTime(float waitingTime)
         {
+            print("Timer::SetWaitingTime -> " + waitingTime);
             _waitingTime = waitingTime;
             if(_waitingTime <= 0)
                 throw new System.Exception("Time allocated not set...");
 
             _timeLeft = _waitingTime;
+
+            InvokeRepeating("CountdownTimer", 0, Time.deltaTime);
         }
+
+        private void CountdownTimer()
+        {
+            _timeLeft -= Time.deltaTime * _waitMultiplier;
+            _image.fillAmount = _timeLeft / _waitingTime;
+
+            if(_timeLeft < 0)
+            {
+                onTimeOver.Invoke();
+                CancelInvoke("CountdownTimer");
+            }
+        }
+
+        public void UpdateWaitMultiplier() => _waitMultiplier = 2;
     }
 }
