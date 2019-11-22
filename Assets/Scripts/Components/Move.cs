@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SaladChef.Core
 {
@@ -12,7 +13,7 @@ namespace SaladChef.Core
         private void Start()
         {
             var orderValidator = GetComponent<OrderValidator>();
-            if(orderValidator == null)
+            if (orderValidator == null)
                 throw new System.Exception("Cannot find OrderValidaor...");
         }
 
@@ -24,6 +25,14 @@ namespace SaladChef.Core
         private void MoveTo()
         {
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, target, 1 * Time.deltaTime);
+
+            if (Math.Floor(gameObject.transform.position.x) == Math.Floor(target.x) &&
+            Math.Floor(gameObject.transform.position.y) == Math.Floor(target.y) &&
+            Math.Floor(gameObject.transform.position.z) == Math.Floor(target.z))
+            {
+                CancelInvoke("MoveTo");
+                print("Canceliing MoveTo invoke");
+            }
         }
     }
 }
