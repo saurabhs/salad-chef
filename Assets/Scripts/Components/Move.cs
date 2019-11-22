@@ -11,7 +11,7 @@ namespace SaladChef.Core
 
         private void Start()
         {
-            var orderValidator = GetComponent<OrderValidity>();
+            var orderValidator = GetComponent<OrderValidator>();
             if(orderValidator == null)
                 throw new System.Exception("Cannot find OrderValidaor...");
         }

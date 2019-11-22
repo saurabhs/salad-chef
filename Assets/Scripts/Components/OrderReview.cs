@@ -11,7 +11,7 @@ namespace SaladChef.Core
                 throw new System.Exception("Cannot find Timer Component...");
             timer.onTimeOver.AddListener(OnTimeOver);
 
-            var orderValidator = GetComponent<OrderValidity>();
+            var orderValidator = GetComponent<OrderValidator>();
             if(orderValidator == null)
                 throw new System.Exception("Cannot find OrderValidity component...");
             orderValidator.onOrderValidated.AddListener(OnOrderValidated);
