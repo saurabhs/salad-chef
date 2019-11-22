@@ -22,7 +22,16 @@ namespace SaladChef.Core
 
         private void Start()
         {
-            print("OrderCreator::Start");
+            var initiateCustomer = GetComponent<InitiateCustomer>();
+            if(initiateCustomer == null)
+                throw new System.Exception("Cannot find EnterSaladBar comp...");
+
+            initiateCustomer.onCustomerSeated.AddListener(Setup);
+        }
+
+        private void Setup()
+        {
+            print("OrderCreator::Setup");
 
             onOrderPlaced = new OnOrderPlaced();
             _order = CreateOrder();
