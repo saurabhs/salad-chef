@@ -28,6 +28,13 @@ namespace SaladChef.Core
             print("OrderReview::OnTimeOver");
 
             //handle players score
+            var angryScores = GetComponent<AngryScore>();
+            if(angryScores == null)
+                throw new System.Exception("Cannot find AngryScore component...");
+            
+            //give angry score
+            foreach(var player in angryScores.FaultedPlayers)
+                player.GetComponent<HUD>().UpdateScore(-100, false);
 
             //move out
             var move = GetComponent<Move>();
