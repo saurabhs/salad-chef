@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SaladChef.Events;
+using UnityEngine;
 
 namespace SaladChef.Core
 {
@@ -9,14 +10,25 @@ namespace SaladChef.Core
         ///</summary>///
         private string _order = string.Empty;
 
+        ///<summary>///
+        ///stores the food order customer ordered
+        ///</summary>///
         public string OrderPlaced { get => _order; }
-        
+
+        ///<summary>///
+        ///stores the food order customer ordered
+        ///</summary>///
+        public OnOrderPlaced onOrderPlaced = null;
+
         private void Start()
         {
+            print("OrderCreator::Start");
+
+            onOrderPlaced = new OnOrderPlaced();
             _order = CreateOrder();
 
             var timerComp = GetComponent<Timer>();
-            if(timerComp == null)
+            if (timerComp == null)
                 throw new System.Exception("Timer Component required...");
 
             timerComp.SetWatingTime(GetWaitingTime());
@@ -24,12 +36,19 @@ namespace SaladChef.Core
 
         private string CreateOrder()
         {
-            return "A|B|C";
+            print("OrderCreator::CreateOrder");
+
+            var order = "A|B|C";
+            onOrderPlaced.Invoke(order);
+
+            return order;
         }
 
         private float GetWaitingTime()
         {
-            if(_order == string.Empty) 
+            print("OrderCreator::GetWaitingTime");
+
+            if (_order == string.Empty)
                 throw new System.Exception("Invalid order...");
 
             return 10f;
