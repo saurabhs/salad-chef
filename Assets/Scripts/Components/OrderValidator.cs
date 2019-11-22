@@ -23,8 +23,6 @@ namespace SaladChef.Core
 
         private void Start()
         {
-            print("OrderValidator::Start");
-
             onOrderValidated = new OnOrderValidated();
             onWrongOrderReceived = new OnWrongOrderReceived();
 
@@ -36,8 +34,6 @@ namespace SaladChef.Core
              if(orderReceiver == null)
                 throw new System.Exception("Cannot find OrderReceiver...");
             orderReceiver.onOrderReceived.AddListener(OnOrderReceived);
-
-            onWrongOrderReceived.AddListener(OnWrongOrderReceived);
         }
 
         private void OnOrderReceived(GameObject player, string orderReceived, float timeRemaining, float totalTime)
@@ -52,7 +48,7 @@ namespace SaladChef.Core
             else
             {
                 print("Wrong Order Received");
-                onWrongOrderReceived.Invoke();
+                onWrongOrderReceived.Invoke(player);
             }
         }
 
@@ -60,12 +56,6 @@ namespace SaladChef.Core
         {
             print("OrderValidator::CalculateScore");
             return totalTime / timeRemaining;
-        }
-
-        private void OnWrongOrderReceived()
-        {
-            var timer = GetComponent<Timer>();
-            timer.UpdateWaitMultiplier();
         }
     }
 }

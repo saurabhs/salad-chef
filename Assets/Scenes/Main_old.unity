@@ -1860,6 +1860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1753083947}
   - component: {fileID: 1753083946}
+  - component: {fileID: 1753083953}
   - component: {fileID: 1753083951}
   - component: {fileID: 1753083955}
   - component: {fileID: 1753083950}
@@ -1867,6 +1868,7 @@ GameObject:
   - component: {fileID: 1753083948}
   - component: {fileID: 1753083952}
   - component: {fileID: 1753083954}
+  - component: {fileID: 1753083956}
   m_Layer: 0
   m_Name: Customer1
   m_TagString: Untagged
@@ -1999,6 +2001,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b654670961cb30d458ff1c3c00fdc383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1753083953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753083945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3601aff9373af954b81e2cb19d102800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: Customer
 --- !u!114 &1753083954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2026,6 +2041,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {x: 3, y: 3, z: 0}
+--- !u!114 &1753083956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753083945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34df69caa93308448a766b0994f7a1af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _faultedPlayers: []
 --- !u!1 &1761907587
 GameObject:
   m_ObjectHideFlags: 0
