@@ -13,7 +13,6 @@ namespace SaladChef.Core
 
         private void Start()
         {
-            print("OrderReceiver:Start");
             onOrderReceived = new OnOrderReceived();
 
             StartCoroutine(MockReceive());
@@ -21,12 +20,12 @@ namespace SaladChef.Core
 
         private IEnumerator MockReceive()
         {
+            yield return new WaitForSecondsRealtime(10f);
+            
             print("OrderReceiver:MockReceive");
 
-            yield return new WaitForSeconds(5f);
-
             var player1 = GameObject.Find("Player1");
-            onOrderReceived.Invoke(player1, player1.GetComponent<OrderCarrier>().GetOrder(), 25f, 60f);
+            onOrderReceived.Invoke(player1, player1.GetComponent<OrderCarrier>().GetWrongOrder(), 25f, 60f);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
