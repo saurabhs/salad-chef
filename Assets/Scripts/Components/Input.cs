@@ -41,7 +41,7 @@ namespace SaladChef.Core
 
         public OnMoveToTable moveToTable = null;
         public OnMoveToKitchen moveToKitchen = null;
-        public OnChopVegetable chopVegeable = null;
+        public OnChopVegetableStart chopVegeable = null;
         public OnServeToCustomer serveSalad = null;
         public OnDiscardVegetable discard = null;
 
@@ -49,7 +49,7 @@ namespace SaladChef.Core
         {
             moveToTable = new OnMoveToTable();
             moveToKitchen = new OnMoveToKitchen();
-            chopVegeable = new OnChopVegetable();
+            chopVegeable = new OnChopVegetableStart();
             serveSalad = new OnServeToCustomer();
             discard = new OnDiscardVegetable();
         }

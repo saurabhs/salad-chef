@@ -11,7 +11,9 @@
 
     public class OnMoveToTable : UnityEngine.Events.UnityEvent<int> { }
     public class OnMoveToKitchen : UnityEngine.Events.UnityEvent { }
-    public class OnChopVegetable : UnityEngine.Events.UnityEvent { }
+    public class OnChopVegetableStart : UnityEngine.Events.UnityEvent { }
     public class OnServeToCustomer : UnityEngine.Events.UnityEvent<int> { }
     public class OnDiscardVegetable : UnityEngine.Events.UnityEvent { }
+
+    public class OnVegetableChoppedComplete : UnityEngine.Events.UnityEvent<Core.Vegetable> { }
 }
