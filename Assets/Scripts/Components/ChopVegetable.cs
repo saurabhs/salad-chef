@@ -6,8 +6,20 @@ namespace SaladChef.Core
 {
     public class ChopVegetable : MonoBehaviour
     {
+        ///<summary>
+        /// ref to Move component for blocking move while chopping
+        ///<summary>
         private Move _move = null;
+
+        ///<summary>
+        /// event tot fire when vegetable is chopped
+        ///<summary>
         public OnVegetableChoppedComplete onVegetableChoppedComplete = null;
+
+        ///<summary>
+        /// flag to avoid multiple chops
+        ///<summary>
+        private bool isBusy = false;
 
         private void Start()
         {
@@ -20,6 +32,9 @@ namespace SaladChef.Core
 
         public void ActivateChopping(Vegetable veggie)
         {
+            if(isBusy)
+                return;
+
             StartCoroutine(Chop(veggie));
         }
 
@@ -37,7 +52,6 @@ namespace SaladChef.Core
 
             //unblock move
             _move.canMove = true;
-
         }
     }
 }
