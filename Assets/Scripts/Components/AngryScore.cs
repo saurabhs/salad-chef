@@ -21,7 +21,8 @@ namespace SaladChef.Core
         private void OnWrongOrderReceived(GameObject player)
         {
             print("Angry::OnWrongOrderReceived");
-            _faultedPlayers.Add(player);
+            if(!_faultedPlayers.Contains(player))
+                _faultedPlayers.Add(player);
 
             UpdateWaitingTimerMultiplier();
         }
