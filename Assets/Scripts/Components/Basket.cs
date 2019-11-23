@@ -5,8 +5,8 @@ namespace SaladChef.Core
 {
     public class Basket : MonoBehaviour
     {
-        [SerializeField] private Stack<Vegetable> _picked = new Stack<Vegetable>();
-        public Stack<Vegetable> Picked => _picked;
+        [SerializeField] private Queue<Vegetable> _picked = new Queue<Vegetable>();
+        public Queue<Vegetable> Picked => _picked;
 
         private void Start()
         {
@@ -21,7 +21,7 @@ namespace SaladChef.Core
             var vegetable = veggie.GetComponent<Vegetable>();
             if(vegetable != null && _picked.Count < 2 && !_picked.Contains(vegetable))
             {
-                _picked.Push(vegetable);
+                _picked.Enqueue(vegetable);
             }
         }
     }

@@ -69,7 +69,7 @@ namespace SaladChef.Core
             if(chopping == null)
                 throw new System.Exception("Cannot find Chopping component...");
 
-            chopping.ActivateChopping(basket.Picked.Pop());
+            chopping.ActivateChopping(basket.Picked.Dequeue());
         }
 
         private void Serve(int index)
