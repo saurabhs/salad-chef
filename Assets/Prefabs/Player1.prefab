@@ -608,6 +608,7 @@ GameObject:
   - component: {fileID: 2765831822330433120}
   - component: {fileID: 2765831822330433123}
   - component: {fileID: 2765831822330433132}
+  - component: {fileID: 536656092}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -739,11 +740,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveKeys: 7100000061000000
-  serveKeys: 00010000
+  serveKeys: 31000000
   kitchenKey: 101
   chopKey: 100
   discardKey: 99
   pickPower: 306
+  usePlate: 304
 --- !u!114 &2765831822330433115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,7 +844,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  customers: []
+  customers:
+  - {fileID: 0}
   kitchen: {fileID: 0}
 --- !u!114 &2765831822330433132
 MonoBehaviour:
@@ -854,5 +857,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fe1ba5d65f671a4ab822490171ea324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &536656092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2765831822330433119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c6f73684e025847a4678313475b2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
