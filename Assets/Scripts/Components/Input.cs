@@ -39,11 +39,17 @@ namespace SaladChef.Core
         /// </summary>
         [SerializeField] private KeyCode pickPower;
 
+        /// <summary>
+        /// move a vegetable plate to that can be used later
+        /// </summary>
+        [SerializeField] private KeyCode usePlate;
+
         public OnMoveToTable moveToTable = null;
         public OnMoveToKitchen moveToKitchen = null;
         public OnChopVegetableStart chopVegeable = null;
         public OnServeToCustomer serveSalad = null;
         public OnDiscardVegetable discard = null;
+        public OnUsePlate onUsePlate = null;
 
         private void Start()
         {
@@ -52,6 +58,7 @@ namespace SaladChef.Core
             chopVegeable = new OnChopVegetableStart();
             serveSalad = new OnServeToCustomer();
             discard = new OnDiscardVegetable();
+            onUsePlate = new OnUsePlate();
         }
 
         private void Update()
@@ -91,6 +98,10 @@ namespace SaladChef.Core
             else if (UnityEngine.Input.GetKeyDown(discardKey))
             {
                 discard.Invoke();
+            }
+            else if (UnityEngine.Input.GetKeyDown(usePlate))
+            {
+                onUsePlate.Invoke();
             }
         }
     }
