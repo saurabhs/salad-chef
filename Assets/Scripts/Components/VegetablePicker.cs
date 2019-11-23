@@ -17,7 +17,7 @@ namespace SaladChef.Core
         {
             if(other.tag.Equals("Vegetable"))
             {
-                print("Veg name " + other.name);
+                print("Picked " + other.name);
                 onVegetablePicked.Invoke(other.gameObject);
             }
         }
