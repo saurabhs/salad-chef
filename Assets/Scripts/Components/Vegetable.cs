@@ -10,5 +10,7 @@ namespace SaladChef.Core
         [SerializeField] private float chopTime = 3f;
 
         public float ChopTime => chopTime;
+
+        private void Start() =>_name = gameObject.name;
     }
 }

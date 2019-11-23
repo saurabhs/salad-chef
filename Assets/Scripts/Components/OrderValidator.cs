@@ -38,23 +38,20 @@ namespace SaladChef.Core
 
         private void OnOrderReceived(GameObject player, string orderReceived, float timeRemaining, float totalTime)
         {
-            print("OrderValidator::OnOrderReceived");
-
             if(orderReceived.Equals(_orderCreator.OrderPlaced))
             {
-                print("Correct Order Received");
+                print($"Correct Order Received -> placed : {_orderCreator.OrderPlaced}, received : {orderReceived}");
                 onOrderValidated.Invoke(player, CalculateScore(timeRemaining, totalTime), timeRemaining / totalTime > 0.3f);
             }
             else
             {
-                print("Wrong Order Received");
+                print($"Wrong Order Received -> placed : {_orderCreator.OrderPlaced}, received : {orderReceived}");
                 onWrongOrderReceived.Invoke(player);
             }
         }
 
         private float CalculateScore(float timeRemaining, float totalTime)
         {
-            print("OrderValidator::CalculateScore");
             return totalTime / timeRemaining;
         }
     }

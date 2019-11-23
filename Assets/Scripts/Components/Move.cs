@@ -37,7 +37,6 @@ namespace SaladChef.Core
             if(!canMove)
                 return;
 
-            print("Move::ActivateMove");
             InvokeRepeating("MoveTo", 0, Time.deltaTime);
         }
 
@@ -50,7 +49,6 @@ namespace SaladChef.Core
             Math.Round(position.y, MidpointRounding.AwayFromZero) == Math.Round(target.y, MidpointRounding.AwayFromZero) &&
             Math.Round(position.z, MidpointRounding.AwayFromZero) == Math.Round(target.z, MidpointRounding.AwayFromZero))
             {
-                print("Canceliing MoveTo invoke");
                 CancelInvoke("MoveTo");
                 onMoveComplete.Invoke();
             }
