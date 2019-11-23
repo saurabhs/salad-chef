@@ -7,4 +7,11 @@
     public class OnWrongOrderReceived : UnityEngine.Events.UnityEvent<UnityEngine.GameObject> { }
     public class OnOrderValidated : UnityEngine.Events.UnityEvent<UnityEngine.GameObject, float, bool> { }
     public class OnMoveComplete : UnityEngine.Events.UnityEvent { }
+    public class OnVegetablePicked : UnityEngine.Events.UnityEvent<UnityEngine.GameObject> { }
+
+    public class OnMoveToTable : UnityEngine.Events.UnityEvent<int> { }
+    public class OnMoveToKitchen : UnityEngine.Events.UnityEvent { }
+    public class OnChopVegetable : UnityEngine.Events.UnityEvent { }
+    public class OnServeToCustomer : UnityEngine.Events.UnityEvent<int> { }
+    public class OnDiscardVegetable : UnityEngine.Events.UnityEvent { }
 }
