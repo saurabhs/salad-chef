@@ -25,6 +25,8 @@ namespace SaladChef.Core
         /// </summary>
         public OnMoveComplete onMoveComplete = null;
 
+        public bool canMove = true;
+
         private void Start()
         {
             onMoveComplete = new OnMoveComplete();
@@ -32,6 +34,9 @@ namespace SaladChef.Core
 
         public void ActivateMove()
         {
+            if(!canMove)
+                return;
+
             print("Move::ActivateMove");
             InvokeRepeating("MoveTo", 0, Time.deltaTime);
         }
