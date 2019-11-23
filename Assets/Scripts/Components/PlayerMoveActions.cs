@@ -55,14 +55,19 @@ namespace SaladChef.Core
 
         private void Chop()
         {
-            print("start chop");
-            var chopping = GetComponent<ChopVegetable>();
-            if(chopping == null)
-                throw new System.Exception("Cannot find Chopping component...");
-
             var basket = GetComponent<Basket>();
             if(basket == null)
                 throw new System.Exception("Cannot find Basket...");
+                
+            //empty basket
+            if(basket.Picked.Count == 0)
+                return;
+
+            print("start chop");
+
+            var chopping = GetComponent<ChopVegetable>();
+            if(chopping == null)
+                throw new System.Exception("Cannot find Chopping component...");
 
             chopping.ActivateChopping(basket.Picked.Pop());
         }
