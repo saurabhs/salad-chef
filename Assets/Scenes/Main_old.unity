@@ -485,7 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9392916b9abd6c945b31b78dcae52c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: B
+  _name: Veggies_B
   chopTime: 3
 --- !u!61 &445474692
 BoxCollider2D:
@@ -519,7 +519,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2765831822381594244}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &536656092
+--- !u!114 &536656106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -528,7 +528,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 536656091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c6f73684e025847a4678313475b2fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 0042634f81524e84b9278f002d2000cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &583049017
@@ -818,7 +818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9392916b9abd6c945b31b78dcae52c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: E
+  _name: Veggies_E
   chopTime: 3
 --- !u!61 &808901591
 BoxCollider2D:
@@ -1101,7 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9392916b9abd6c945b31b78dcae52c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: D
+  _name: Veggies_D
   chopTime: 3
 --- !u!61 &1258654046
 BoxCollider2D:
@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9392916b9abd6c945b31b78dcae52c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: C
+  _name: Veggies_C
   chopTime: 3
 --- !u!61 &1321942825
 BoxCollider2D:
@@ -1395,6 +1395,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1753083947 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6359858479191092426, guid: e239c9e20def9674a87fa7afb150fade,
+    type: 3}
+  m_PrefabInstance: {fileID: 6359858478781897953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1761907587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,7 +1494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9392916b9abd6c945b31b78dcae52c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: A
+  _name: Veggies_A
   chopTime: 3
 --- !u!61 &1761907591
 BoxCollider2D:
@@ -1688,7 +1694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9392916b9abd6c945b31b78dcae52c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: F
+  _name: Veggies_F
   chopTime: 3
 --- !u!61 &2037897286
 BoxCollider2D:
@@ -1813,6 +1819,11 @@ PrefabInstance:
       propertyPath: veggies.Array.data[5]
       value: 
       objectReference: {fileID: 2037897283}
+    - target: {fileID: 2765831822330433123, guid: 409ecfce871645e47864ae366468d5bf,
+        type: 3}
+      propertyPath: customers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1753083947}
     - target: {fileID: 2765831822330433123, guid: 409ecfce871645e47864ae366468d5bf,
         type: 3}
       propertyPath: kitchen
