@@ -15,13 +15,17 @@ namespace SaladChef.Core
         private void Start()
         {
             var input = GetComponent<Input>();
-            if(input == null)
+            if (input == null)
                 throw new System.Exception("Cannot find Input...");
             input.onUsePlate.AddListener(UsePlate);
         }
 
         public void UsePlate()
         {
+            var state = GetComponent<PlayerState>();
+            if (state == null || state.State != Enums.EPlayerState.Kitchen)
+                return;
+
             var basket = GetComponent<Basket>();
             if (basket == null)
                 throw new System.Exception("Cannot find Basket...");

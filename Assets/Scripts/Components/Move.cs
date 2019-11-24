@@ -1,4 +1,5 @@
 ﻿using System;
+using SaladChef.Enums;
 using SaladChef.Events;
 using TMPro;
 using UnityEngine;
@@ -25,18 +26,26 @@ namespace SaladChef.Core
         /// </summary>
         public OnMoveComplete onMoveComplete = null;
 
+        /// <summary>
+        /// flag for blocking movement
+        /// </summary>
         public bool canMove = true;
 
-        private void Start()
-        {
-            onMoveComplete = new OnMoveComplete();
-        }
+        private EPlayerState _postMoveCompleteState;
 
-        public void ActivateMove()
+        private void Start() => onMoveComplete = new OnMoveComplete();
+
+        public void ActivateMove(EPlayerState postState = Enums.EPlayerState.None)
         {
-            if(!canMove)
+            if (!canMove)
                 return;
 
+            _postMoveCompleteState = postState;
+
+            var state = GetComponent<PlayerState>();
+            if (state)
+                state.State = Enums.EPlayerState.Walking;
+                
             InvokeRepeating("MoveTo", 0, Time.deltaTime);
         }
 
@@ -50,6 +59,11 @@ namespace SaladChef.Core
             Math.Round(position.z, MidpointRounding.AwayFromZero) == Math.Round(target.z, MidpointRounding.AwayFromZero))
             {
                 CancelInvoke("MoveTo");
+
+                var state = GetComponent<PlayerState>();
+                if (state)
+                    state.State = _postMoveCompleteState;
+
                 onMoveComplete.Invoke();
             }
         }

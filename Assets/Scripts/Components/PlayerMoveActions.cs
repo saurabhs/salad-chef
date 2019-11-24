@@ -20,8 +20,14 @@ namespace SaladChef.Core
         /// </summary>
         [SerializeField] private Transform kitchen;
 
+        private PlayerState _state;
+
         private void Start()
         {
+            _state = GetComponent<PlayerState>();
+            if(_state == null)
+                throw new System.Exception("Cannot find PlayerState component...");
+
             var input = GetComponent<Input>();
             if (input == null)
                 throw new System.Exception("Cannot find Input component...");
@@ -34,7 +40,6 @@ namespace SaladChef.Core
             input.moveToKitchen.AddListener(MoveToKitchen);
             input.chopVegeable.AddListener(Chop);
             input.serveSalad.AddListener(Serve);
-            input.discard.AddListener(Discard);
         }
 
         private void MoveToTable(int index)
@@ -42,7 +47,7 @@ namespace SaladChef.Core
             print("move to table");
             var move = GetComponent<Move>();
             move.target = veggies[index].position;
-            move.ActivateMove();
+            move.ActivateMove(Enums.EPlayerState.Table);
         }
 
         private void MoveToKitchen()
@@ -50,11 +55,14 @@ namespace SaladChef.Core
             print("move to kitchen");
             var move = GetComponent<Move>();
             move.target = kitchen.position;
-            move.ActivateMove();
+            move.ActivateMove(Enums.EPlayerState.Kitchen);
         }
 
         private void Chop()
         {
+            if(_state.State != Enums.EPlayerState.Kitchen)
+                return;
+
             var basket = GetComponent<Basket>();
             if(basket == null)
                 throw new System.Exception("Cannot find Basket...");
@@ -74,15 +82,14 @@ namespace SaladChef.Core
 
         private void Serve(int index)
         {
+            if(_state.State != Enums.EPlayerState.Kitchen)
+                return;
+
             print("move to serve");
+
             var move = GetComponent<Move>();
             move.target = customers[index].position;
-            move.ActivateMove();
-        }
-
-        private void Discard()
-        {
-            print("move to discard");
+            move.ActivateMove(Enums.EPlayerState.Customer);
         }
     }
 }
