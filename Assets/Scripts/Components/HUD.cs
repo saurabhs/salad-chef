@@ -8,7 +8,7 @@ namespace SaladChef.Core
         ///<summary>///
         /// player's score
         ///</summary>///
-        private float _score = 0;
+        [SerializeField] private float _score = 0;
 
         ///<summary>///
         ///score text comp
@@ -25,6 +25,8 @@ namespace SaladChef.Core
         ///</summary>///
         private Timer _timer = null;
 
+        public float Score => _score;
+
         private void OnEnable()
         {
             _timer = GetComponent<Timer>();
@@ -35,7 +37,6 @@ namespace SaladChef.Core
                 throw new System.Exception("Cannot find Text component...");
 
             InitHUD();
-
             InvokeRepeating("UpdateTimer", 0, 0.5f);
         }
 
@@ -48,8 +49,15 @@ namespace SaladChef.Core
         public void UpdateScore(float score, bool bonus)
         {
             _score += score + (bonus ? 100 : 0);
-            _scoreText.text = $"SCORE {_score.ToString()}";
+            _scoreText.text = $"SCORE {_score.ToString("0")}";
         }
+
+        public void UpdateScore(float multiplier)
+        {
+            _score *= multiplier;
+            _scoreText.text = $"SCORE {_score.ToString("0")}";
+        }
+
 
         private void UpdateTimer()
         {
