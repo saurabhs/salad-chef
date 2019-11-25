@@ -35,6 +35,7 @@ namespace SaladChef.Core
 
         private void OnDisable()
         {
+            onCustomerSeated.RemoveAllListeners();
             onCustomerSeated = null;
         }
 
