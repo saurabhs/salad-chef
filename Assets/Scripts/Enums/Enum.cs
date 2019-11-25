@@ -1,11 +1,13 @@
 ﻿namespace SaladChef.Enums
 {
-    public enum EPlayerState
+    public enum EState
     {
         None,
         Kitchen,
         Table,
         Customer,
-        Walking
+        Walking,
+        Sitting,
+        Exit
     }
 }

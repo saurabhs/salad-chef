@@ -20,11 +20,11 @@ namespace SaladChef.Core
         /// </summary>
         [SerializeField] private Transform kitchen;
 
-        private PlayerState _state;
+        private State _state;
 
-        private void Start()
+        private void OnEnable()
         {
-            _state = GetComponent<PlayerState>();
+            _state = GetComponent<State>();
             if(_state == null)
                 throw new System.Exception("Cannot find PlayerState component...");
 
@@ -47,7 +47,7 @@ namespace SaladChef.Core
             print("move to table");
             var move = GetComponent<Move>();
             move.target = veggies[index].position;
-            move.ActivateMove(Enums.EPlayerState.Table);
+            move.ActivateMove(Enums.EState.Table);
         }
 
         private void MoveToKitchen()
@@ -55,12 +55,12 @@ namespace SaladChef.Core
             print("move to kitchen");
             var move = GetComponent<Move>();
             move.target = kitchen.position;
-            move.ActivateMove(Enums.EPlayerState.Kitchen);
+            move.ActivateMove(Enums.EState.Kitchen);
         }
 
         private void Chop()
         {
-            if(_state.State != Enums.EPlayerState.Kitchen)
+            if(_state.CurrentState != Enums.EState.Kitchen)
                 return;
 
             var basket = GetComponent<Basket>();
@@ -82,14 +82,14 @@ namespace SaladChef.Core
 
         private void Serve(int index)
         {
-            if(_state.State != Enums.EPlayerState.Kitchen)
+            if(_state.CurrentState != Enums.EState.Kitchen)
                 return;
 
             print("move to serve");
 
             var move = GetComponent<Move>();
             move.target = customers[index].position;
-            move.ActivateMove(Enums.EPlayerState.Customer);
+            move.ActivateMove(Enums.EState.Customer);
         }
     }
 }

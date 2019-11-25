@@ -22,8 +22,8 @@ namespace SaladChef.Core
 
         public void UsePlate()
         {
-            var state = GetComponent<PlayerState>();
-            if (state == null || state.State != Enums.EPlayerState.Kitchen)
+            var state = GetComponent<State>();
+            if (state == null || state.CurrentState != Enums.EState.Kitchen)
                 return;
 
             var basket = GetComponent<Basket>();

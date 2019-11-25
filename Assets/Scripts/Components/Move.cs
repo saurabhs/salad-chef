@@ -14,7 +14,7 @@ namespace SaladChef.Core
         /// <summary>
         /// Handles movement based on input
         /// </summary>
-        public Vector3 target = Vector3.zero;
+        [HideInInspector] public Vector3 target = Vector3.zero;
 
         /// <summary>
         /// Handles movement based on input
@@ -27,25 +27,37 @@ namespace SaladChef.Core
         public OnMoveComplete onMoveComplete = null;
 
         /// <summary>
+        /// ref to State component
+        /// <summary>
+        private State _state = null;
+
+        /// <summary>
         /// flag for blocking movement
         /// </summary>
         public bool canMove = true;
 
-        private EPlayerState _postMoveCompleteState;
+        /// <summary>
+        /// State to be set after the move has been completed
+        /// </summary>
+        private EState _postMoveCompleteState;
 
-        private void Start() => onMoveComplete = new OnMoveComplete();
+        private void OnEnable() 
+        {
+            onMoveComplete = new OnMoveComplete();
+            _state = GetComponent<State>();
+            if(_state == null)
+                throw new Exception("Cannot find State component...");
+        }
 
-        public void ActivateMove(EPlayerState postState = Enums.EPlayerState.None)
+        private void OnDisable() => onMoveComplete = null;
+
+        public void ActivateMove(Enums.EState postState = EState.None)
         {
             if (!canMove)
                 return;
 
             _postMoveCompleteState = postState;
-
-            var state = GetComponent<PlayerState>();
-            if (state)
-                state.State = Enums.EPlayerState.Walking;
-                
+            _state.CurrentState = Enums.EState.Walking;
             InvokeRepeating("MoveTo", 0, Time.deltaTime);
         }
 
@@ -60,10 +72,7 @@ namespace SaladChef.Core
             {
                 CancelInvoke("MoveTo");
 
-                var state = GetComponent<PlayerState>();
-                if (state)
-                    state.State = _postMoveCompleteState;
-
+                _state.CurrentState = _postMoveCompleteState;
                 onMoveComplete.Invoke();
             }
         }

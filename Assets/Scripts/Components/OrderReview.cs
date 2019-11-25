@@ -40,8 +40,8 @@ namespace SaladChef.Core
             var move = GetComponent<Move>();
             if(move == null)
                 throw new System.Exception("Canot find Move component...");
-            move.target = transform.position + new Vector3(0, 10f, 0);
-            move.ActivateMove();
+            move.target = transform.position + new Vector3(0, 3f, 0);
+            move.ActivateMove(Enums.EState.Exit);
         }
     }
 }
