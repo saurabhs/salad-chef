@@ -15,6 +15,6 @@
     public class OnServeToCustomer : UnityEngine.Events.UnityEvent<int> { }
     public class OnDiscardVegetable : UnityEngine.Events.UnityEvent { }
     public class OnUsePlate : UnityEngine.Events.UnityEvent { }
-
+    public class OnPickupPowerup: UnityEngine.Events.UnityEvent { }
     public class OnVegetableChoppedComplete : UnityEngine.Events.UnityEvent<Core.Vegetable> { }
 }

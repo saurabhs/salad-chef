@@ -35,9 +35,9 @@ namespace SaladChef.Core
         [SerializeField] private KeyCode discardKey;
 
         /// <summary>
-        /// 
+        /// keycode for picking powerup
         /// </summary>
-        [SerializeField] private KeyCode pickPower;
+        [SerializeField] private KeyCode pickPowerup;
 
         /// <summary>
         /// move a vegetable plate to that can be used later
@@ -50,6 +50,7 @@ namespace SaladChef.Core
         public OnServeToCustomer serveSalad = null;
         public OnDiscardVegetable discard = null;
         public OnUsePlate onUsePlate = null;
+        public OnPickupPowerup onPickupPowerup = null;
 
         private void OnEnable()
         {
@@ -59,6 +60,7 @@ namespace SaladChef.Core
             serveSalad = new OnServeToCustomer();
             discard = new OnDiscardVegetable();
             onUsePlate = new OnUsePlate();
+            onPickupPowerup = new OnPickupPowerup();
         }
 
         private void OnDisable()
@@ -69,6 +71,7 @@ namespace SaladChef.Core
             serveSalad.RemoveAllListeners();
             discard.RemoveAllListeners();
             onUsePlate.RemoveAllListeners();
+            onPickupPowerup.RemoveAllListeners();
         }
 
         private void Update()
@@ -112,6 +115,10 @@ namespace SaladChef.Core
             else if (UnityEngine.Input.GetKeyDown(usePlate))
             {
                 onUsePlate.Invoke();
+            }
+            else if(UnityEngine.Input.GetKeyDown(pickPowerup))
+            {
+                onPickupPowerup.Invoke();
             }
         }
     }

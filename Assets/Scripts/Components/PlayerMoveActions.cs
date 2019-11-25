@@ -1,15 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SaladChef.Core
 {
     public class PlayerMoveActions : MonoBehaviour
     {
-        // /// <summary>
-        // /// saves the position of customers on the table
-        // /// </summary>
-        // [SerializeField] private List<Transform> customers;
-
         /// <summary>
         /// saves the position of kitchen/chopping board
         /// </summary>
@@ -33,7 +27,7 @@ namespace SaladChef.Core
         private void OnEnable()
         {
             _state = GetComponent<State>();
-            if(_state == null)
+            if (_state == null)
                 throw new System.Exception("Cannot find PlayerState component...");
 
             var input = GetComponent<Input>();
@@ -46,7 +40,7 @@ namespace SaladChef.Core
                 throw new System.Exception("Cannot find Vegetable Store...");
 
             _customerStore = FindObjectOfType<CustomerStore>();
-            if(_customerStore == null)
+            if (_customerStore == null)
                 throw new System.Exception("Cannot find Cusotmer Store...");
         }
 
@@ -56,6 +50,7 @@ namespace SaladChef.Core
             input.moveToKitchen.AddListener(MoveToKitchen);
             input.chopVegeable.AddListener(Chop);
             input.serveSalad.AddListener(Serve);
+            input.onPickupPowerup.AddListener(PickupPowerup);
         }
 
         private void MoveToTable(int index)
@@ -74,19 +69,19 @@ namespace SaladChef.Core
 
         private void Chop()
         {
-            if(_state.CurrentState != Enums.EState.Kitchen)
+            if (_state.CurrentState != Enums.EState.Kitchen)
                 return;
 
             var basket = GetComponent<Basket>();
-            if(basket == null)
+            if (basket == null)
                 throw new System.Exception("Cannot find Basket...");
-                
+
             //empty basket
-            if(basket.Picked.Count == 0)
+            if (basket.Picked.Count == 0)
                 return;
 
             var chopping = GetComponent<ChopVegetable>();
-            if(chopping == null)
+            if (chopping == null)
                 throw new System.Exception("Cannot find Chopping component...");
 
             chopping.ActivateChopping(basket.Picked.Dequeue());
@@ -94,12 +89,23 @@ namespace SaladChef.Core
 
         private void Serve(int index)
         {
-            if(_state.CurrentState != Enums.EState.Kitchen)
+            if (_state.CurrentState != Enums.EState.Kitchen)
                 return;
 
             var move = GetComponent<Move>();
             move.target = _customerStore.Store[index].transform.position;
             move.ActivateMove(Enums.EState.Customer);
+        }
+
+        private void PickupPowerup()
+        {
+            var powerup = FindObjectOfType<Powerups.Powerup>();
+            if (powerup)
+            {
+                var move = GetComponent<Move>();
+                move.target = powerup.transform.position;
+                move.ActivateMove(Enums.EState.None);
+            }
         }
     }
 }
