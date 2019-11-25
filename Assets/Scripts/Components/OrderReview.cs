@@ -20,6 +20,16 @@ namespace SaladChef.Core
         private void OnOrderValidated(GameObject player, float score, bool bonus)
         {
             player.GetComponent<HUD>().UpdateScore(score, bonus);
+            var timer = GetComponent<Timer>();
+            if(timer == null) 
+                throw new System.Exception("Cannot find Timer Component...");
+            
+            // removing listeners to avoid player
+            // getting -ve marks if the time runs over
+            // just before the customer is reset
+            timer.onTimeOver.RemoveAllListeners();
+            
+            MoveOut();
         }
 
         private void OnTimeOver()
@@ -33,7 +43,11 @@ namespace SaladChef.Core
             foreach(var player in angryScores.FaultedPlayers)
                 player.GetComponent<HUD>().UpdateScore(-100, false);
 
-            //move out
+            MoveOut();
+        }
+        
+        private void MoveOut()
+        {
             var move = GetComponent<Move>();
             if(move == null)
                 throw new System.Exception("Canot find Move component...");
