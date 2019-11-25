@@ -21,13 +21,19 @@ namespace SaladChef.Core
         ///<summary>
         private bool isBusy = false;
 
-        private void Start()
+        private void OnEnable()
         {
             onVegetableChoppedComplete = new OnVegetableChoppedComplete();
             
             _move = GetComponent<Move>();
             if(_move == null)
                 throw new System.Exception("Cannot find Move component...");
+        }
+
+        private void OnDisable()
+        {
+            onVegetableChoppedComplete.RemoveAllListeners();   
+            onVegetableChoppedComplete = null;
         }
 
         public void ActivateChopping(Vegetable veggie)

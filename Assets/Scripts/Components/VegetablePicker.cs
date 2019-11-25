@@ -7,10 +7,16 @@ namespace SaladChef.Core
     {
         public OnVegetablePicked onVegetablePicked = null;
 
-        private void Start()
+        private void OnEnable()
         {
             print("VegetablePicker::Start");
             onVegetablePicked = new OnVegetablePicked(); 
+        }
+
+        private void OnDisable()
+        {
+            onVegetablePicked.RemoveAllListeners();
+            onVegetablePicked = null;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

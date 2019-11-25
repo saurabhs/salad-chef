@@ -8,7 +8,7 @@ namespace SaladChef.Entity
 
         public string Name => _name;
 
-        private void Start()
+        private void OnEnable()
         {
             //set random colour
             GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);

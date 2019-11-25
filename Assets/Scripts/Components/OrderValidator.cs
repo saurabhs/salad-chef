@@ -21,7 +21,7 @@ namespace SaladChef.Core
         ///</summary>///
         public OnWrongOrderReceived onWrongOrderReceived = null;
 
-        private void Start()
+        private void OnEnable()
         {
             onOrderValidated = new OnOrderValidated();
             onWrongOrderReceived = new OnWrongOrderReceived();
@@ -34,6 +34,17 @@ namespace SaladChef.Core
              if(orderReceiver == null)
                 throw new System.Exception("Cannot find OrderReceiver...");
             orderReceiver.onOrderReceived.AddListener(OnOrderReceived);
+        }
+
+        private void OnDisable()
+        {
+            onOrderValidated.RemoveAllListeners();
+            onOrderValidated = null;
+
+            onWrongOrderReceived.RemoveAllListeners();
+            onWrongOrderReceived = null;
+            
+             _orderCreator = null;
         }
 
         private void OnOrderReceived(GameObject player, string orderReceived, float timeRemaining, float totalTime)

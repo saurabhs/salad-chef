@@ -34,7 +34,7 @@ namespace SaladChef.Core
         public float TimeLeft { get => _timeLeft; }
         public float WaitingTIme { get => _waitingTime; }
 
-        private void Start()
+        private void OnEnable()
         {
             print("Timer::Start");
 
@@ -43,6 +43,8 @@ namespace SaladChef.Core
 
             onTimeOver = new OnTimeOver();
         }
+
+        private void OnDisable() => onTimeOver.RemoveAllListeners();
 
         public void SetWatingTime(float waitingTime)
         {

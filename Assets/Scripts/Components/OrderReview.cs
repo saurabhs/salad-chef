@@ -4,7 +4,7 @@ namespace SaladChef.Core
 {
     public class OrderReview : MonoBehaviour
     {
-        private void Start()
+        private void OnEnable()
         {
             var timer = GetComponent<Timer>();
             if(timer == null) 

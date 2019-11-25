@@ -12,7 +12,7 @@ namespace SaladChef.Core
 
         public Vegetable Veggie => _veggie;
 
-        private void Start()
+        private void OnEnable()
         {
             var input = GetComponent<Input>();
             if (input == null)

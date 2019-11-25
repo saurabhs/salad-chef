@@ -9,7 +9,7 @@ namespace SaladChef.Core
 
         public List<GameObject> FaultedPlayers => _faultedPlayers;
         
-        private void Start()
+        private void OnEnable()
         {
             var orderValidator = GetComponent<OrderValidator>();
             if(orderValidator == null)

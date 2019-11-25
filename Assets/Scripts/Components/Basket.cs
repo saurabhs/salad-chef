@@ -8,13 +8,15 @@ namespace SaladChef.Core
         [SerializeField] private Queue<Vegetable> _picked = new Queue<Vegetable>();
         public Queue<Vegetable> Picked => _picked;
 
-        private void Start()
+        private void OnEnable()
         {
             var vegPicker = GetComponent<VegetablePicker>();
             if(vegPicker == null)
                 throw new System.Exception("Cannot find VegetablePicker...");
             vegPicker.onVegetablePicked.AddListener(OnPicked);
         }
+
+        private void OnDisable() => _picked.Clear();
 
         private void OnPicked(GameObject veggie)
         {

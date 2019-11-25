@@ -6,7 +6,7 @@ namespace SaladChef.Core
 {
     public class ServeOrder : MonoBehaviour
     {
-        /*[SerializeField]*/ private List<Vegetable> _salad = new List<Vegetable>();
+        private List<Vegetable> _salad = new List<Vegetable>();
         public string Order {
             get {
                 var sb = new StringBuilder();
@@ -15,7 +15,7 @@ namespace SaladChef.Core
             }
         }
 
-        private void Start()
+        private void OnEnable()
         {
             var chop = GetComponent<ChopVegetable>();
             if (chop == null)
@@ -27,7 +27,6 @@ namespace SaladChef.Core
                 throw new System.Exception("Cannot find Input component...");
 
             input.discard.AddListener(DiscardChoppedVegetable);
-            input.serveSalad.AddListener(ServeSalad);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -37,11 +36,6 @@ namespace SaladChef.Core
                 var customer = other.GetComponent<OrderReceiver>();
                 customer.Receive(gameObject);
             }
-        }
-
-        private void ServeSalad(int index)
-        {
-            // throw new NotImplementedException();
         }
 
         private void MoveChoppedVegetableToPlate(Vegetable veggie)

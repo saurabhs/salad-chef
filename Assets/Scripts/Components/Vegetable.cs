@@ -11,6 +11,6 @@ namespace SaladChef.Core
 
         public float ChopTime => chopTime;
 
-        private void Start() =>_name = gameObject.name;
+        private void OnEnable() =>_name = gameObject.name;
     }
 }

@@ -11,9 +11,15 @@ namespace SaladChef.Core
         ///</summary>///
         public OnOrderReceived onOrderReceived = null;
 
-        private void Start()
+        private void OnEnable()
         {
             onOrderReceived = new OnOrderReceived();
+        }
+
+        private void OnDisable()
+        {
+            onOrderReceived.RemoveAllListeners();
+            onOrderReceived = null;
         }
 
         public void Receive(GameObject player)

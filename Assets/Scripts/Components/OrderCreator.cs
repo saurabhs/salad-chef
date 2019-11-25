@@ -20,7 +20,7 @@ namespace SaladChef.Core
         ///</summary>///
         public OnOrderPlaced onOrderPlaced = null;
 
-        private void Start()
+        private void OnEnable()
         {
             var initiateCustomer = GetComponent<InitiateCustomer>();
             if(initiateCustomer == null)

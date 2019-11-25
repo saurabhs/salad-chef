@@ -25,7 +25,7 @@ namespace SaladChef.Core
         ///</summary>///
         private Timer _timer = null;
 
-        private void Start()
+        private void OnEnable()
         {
             print("Score::Start");
             

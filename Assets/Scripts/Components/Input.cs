@@ -51,7 +51,7 @@ namespace SaladChef.Core
         public OnDiscardVegetable discard = null;
         public OnUsePlate onUsePlate = null;
 
-        private void Start()
+        private void OnEnable()
         {
             moveToTable = new OnMoveToTable();
             moveToKitchen = new OnMoveToKitchen();
@@ -59,6 +59,16 @@ namespace SaladChef.Core
             serveSalad = new OnServeToCustomer();
             discard = new OnDiscardVegetable();
             onUsePlate = new OnUsePlate();
+        }
+
+        private void OnDisable()
+        {
+            moveToTable.RemoveAllListeners();
+            moveToKitchen.RemoveAllListeners();
+            chopVegeable.RemoveAllListeners();
+            serveSalad.RemoveAllListeners();
+            discard.RemoveAllListeners();
+            onUsePlate.RemoveAllListeners();
         }
 
         private void Update()
