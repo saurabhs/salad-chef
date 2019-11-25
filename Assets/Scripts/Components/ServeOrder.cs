@@ -40,7 +40,6 @@ namespace SaladChef.Core
 
         private void MoveChoppedVegetableToPlate(Vegetable veggie)
         {
-            print($"Adding chopped {veggie.name} to plate");
             _salad.Add(veggie);
         }
 

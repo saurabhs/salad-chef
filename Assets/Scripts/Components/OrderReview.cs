@@ -19,14 +19,11 @@ namespace SaladChef.Core
 
         private void OnOrderValidated(GameObject player, float score, bool bonus)
         {
-            print("OrderReview::OnOrderValidated");
             player.GetComponent<HUD>().UpdateScore(score, bonus);
         }
 
         private void OnTimeOver()
         {
-            print("OrderReview::OnTimeOver");
-
             //handle players score
             var angryScores = GetComponent<AngryScore>();
             if(angryScores == null)

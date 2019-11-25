@@ -60,7 +60,6 @@ namespace SaladChef.Core
 
         private void MoveToTable(int index)
         {
-            print("move to table");
             var move = GetComponent<Move>();
             move.target = _veggieStore.Store[index].transform.position;
             move.ActivateMove(Enums.EState.Table);
@@ -68,7 +67,6 @@ namespace SaladChef.Core
 
         private void MoveToKitchen()
         {
-            print("move to kitchen");
             var move = GetComponent<Move>();
             move.target = kitchen.position;
             move.ActivateMove(Enums.EState.Kitchen);
@@ -87,8 +85,6 @@ namespace SaladChef.Core
             if(basket.Picked.Count == 0)
                 return;
 
-            print("start chop");
-
             var chopping = GetComponent<ChopVegetable>();
             if(chopping == null)
                 throw new System.Exception("Cannot find Chopping component...");
@@ -100,8 +96,6 @@ namespace SaladChef.Core
         {
             if(_state.CurrentState != Enums.EState.Kitchen)
                 return;
-
-            print("move to serve");
 
             var move = GetComponent<Move>();
             move.target = _customerStore.Store[index].transform.position;

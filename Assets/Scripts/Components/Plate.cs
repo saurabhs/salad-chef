@@ -33,14 +33,10 @@ namespace SaladChef.Core
             if (_veggie == null)
             {
                 if (basket.Picked.Count > 0)
-                {
                     _veggie = basket.Picked.Dequeue();
-                    print($"Moved {_veggie.Name} to plate");
-                }
             }
             else
             {
-                print($"Moved {_veggie.Name} to basket");
                 basket.Picked.Enqueue(_veggie);
                 _veggie = null;
             }

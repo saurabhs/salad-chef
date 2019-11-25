@@ -36,8 +36,6 @@ namespace SaladChef.Core
 
         private void OnEnable()
         {
-            print("Timer::Start");
-
             if(_image == null)
                 throw new System.Exception("Cannot find waiting timer image...");
 
@@ -48,7 +46,6 @@ namespace SaladChef.Core
 
         public void SetWatingTime(float waitingTime)
         {
-            print("Timer::SetWaitingTime -> " + waitingTime);
             _waitingTime = waitingTime;
             if(_waitingTime <= 0)
                 throw new System.Exception("Time allocated not set...");

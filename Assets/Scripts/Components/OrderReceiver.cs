@@ -24,8 +24,6 @@ namespace SaladChef.Core
 
         public void Receive(GameObject player)
         {
-            print("OrderReceiver:Receive");
-
             var timerComp = GetComponent<Timer>();
             if(timerComp == null)
                 throw new System.Exception("Timer component required...");

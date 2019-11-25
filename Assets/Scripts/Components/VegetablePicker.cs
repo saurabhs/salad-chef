@@ -9,7 +9,6 @@ namespace SaladChef.Core
 
         private void OnEnable()
         {
-            print("VegetablePicker::Start");
             onVegetablePicked = new OnVegetablePicked(); 
         }
 
@@ -22,10 +21,7 @@ namespace SaladChef.Core
         private void OnTriggerEnter2D(Collider2D other)
         {
             if(other.tag.Equals("Vegetable"))
-            {
-                print("Picked " + other.name);
                 onVegetablePicked.Invoke(other.gameObject);
-            }
         }
     }
 }

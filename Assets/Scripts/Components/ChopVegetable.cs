@@ -46,14 +46,11 @@ namespace SaladChef.Core
 
         private IEnumerator Chop(Vegetable veggie)
         {
-            print("Chopping start, blocked move");
-
             //block move
             _move.canMove = false;
 
             yield return new WaitForSeconds(veggie.ChopTime);
             
-            print("Chopping complete");
             onVegetableChoppedComplete.Invoke(veggie);
 
             //unblock move

@@ -27,8 +27,6 @@ namespace SaladChef.Core
 
         private void OnEnable()
         {
-            print("Score::Start");
-            
             _timer = GetComponent<Timer>();
             if (_timer == null)
                 throw new System.Exception("Cannot find Timer component...");
@@ -38,7 +36,6 @@ namespace SaladChef.Core
 
             InitHUD();
 
-            print("InvokeRepeating Score::UpdateTimer");
             InvokeRepeating("UpdateTimer", 0, 0.5f);
         }
 
@@ -50,8 +47,6 @@ namespace SaladChef.Core
 
         public void UpdateScore(float score, bool bonus)
         {
-            print("Score::UpdateScore");
-
             _score += score + (bonus ? 100 : 0);
             _scoreText.text = $"SCORE {_score.ToString()}";
         }

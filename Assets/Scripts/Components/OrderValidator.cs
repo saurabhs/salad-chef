@@ -51,12 +51,10 @@ namespace SaladChef.Core
         {
             if(orderReceived.Equals(_orderCreator.OrderPlaced))
             {
-                print($"Correct Order Received -> placed : {_orderCreator.OrderPlaced}, received : {orderReceived}");
                 onOrderValidated.Invoke(player, CalculateScore(timeRemaining, totalTime), timeRemaining / totalTime > 0.3f);
             }
             else
             {
-                print($"Wrong Order Received -> placed : {_orderCreator.OrderPlaced}, received : {orderReceived}");
                 onWrongOrderReceived.Invoke(player);
             }
         }

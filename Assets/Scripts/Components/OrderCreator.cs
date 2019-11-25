@@ -59,18 +59,14 @@ namespace SaladChef.Core
 
         private void Setup()
         {
-            print("OrderCreator::Setup");
-
             onOrderPlaced = new OnOrderPlaced();
             _order = CreateOrder();
         }
 
         private string CreateOrder()
         {
-            print("OrderCreator::CreateOrder");
-
             ///get order
-            var order = GetOrder(Random.Range(_minHungerLevel, _maxHungerLevel));
+            var order = GetOrder(Random.Range(_minHungerLevel, _maxHungerLevel + 1));
 
             var timerComp = GetComponent<Timer>();
             if (timerComp == null)
@@ -88,7 +84,6 @@ namespace SaladChef.Core
 
         private List<Vegetable> GetOrder(int hungerLevel)
         {
-            print($"hunger level {hungerLevel}");
             var selected = new List<int>();
             var result = new List<Vegetable>();
             while (selected.Count < hungerLevel)
@@ -112,13 +107,11 @@ namespace SaladChef.Core
                 result.Append($"{veggie.Name}|");
             }
 
-            print($"order {result.ToString()}");
             return result.ToString();
         }
 
         private float GetWaitingTime(List<Vegetable> veggies)
         {
-            print("OrderCreator::GetWaitingTime");
             var time = 0f;
             foreach(var veggie in veggies)
                 time += veggie.ChopTime;
