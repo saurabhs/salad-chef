@@ -41,15 +41,17 @@ namespace SaladChef.Core
         /// </summary>
         private EState _postMoveCompleteState;
 
-        private void OnEnable() 
+        private void OnEnable()
         {
             onMoveComplete = new OnMoveComplete();
             _state = GetComponent<State>();
-            if(_state == null)
+            if (_state == null)
                 throw new Exception("Cannot find State component...");
         }
 
         private void OnDisable() => onMoveComplete = null;
+
+        public void UpdateSpeed(float change) => _speed += change;
 
         public void ActivateMove(Enums.EState postState = EState.None)
         {
