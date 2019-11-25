@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 6359858479191092433}
   - component: {fileID: 6359858479191092437}
   - component: {fileID: 6359858479191092435}
+  - component: {fileID: 1207476347}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Customer
@@ -229,7 +230,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60e32b679577f84c9ee3437525a9a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {x: 3, y: 3, z: 0}
+  _target: {x: 0, y: 3, z: 0}
+  _maxDelayBetweenReEntry: 3
 --- !u!114 &6359858479191092431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,9 +304,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43976b5b1fb6ce4e8d04812d9099442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {x: 3, y: 0, z: 0}
+  target: {x: 0, y: 3, z: 0}
   _speed: 4
   canMove: 1
+--- !u!114 &1207476347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6359858479191092424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e840f37294f616b4ca184fa43dc8dde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: 0
 --- !u!1 &6359858480113692561
 GameObject:
   m_ObjectHideFlags: 0

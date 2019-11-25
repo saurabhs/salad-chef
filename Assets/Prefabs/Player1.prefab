@@ -741,8 +741,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9eb89acab464b418e4fb4c6d0808d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveKeys: 7100000061000000
-  serveKeys: 31000000
+  moveKeys: 71000000610000007a000000770000007300000078000000
+  serveKeys: 3100000032000000330000003400000034000000
   kitchenKey: 101
   chopKey: 100
   discardKey: 99
@@ -847,6 +847,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   customers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   kitchen: {fileID: 0}
 --- !u!114 &2765831822330433132
