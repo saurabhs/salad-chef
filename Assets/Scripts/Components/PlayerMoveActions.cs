@@ -6,11 +6,6 @@ namespace SaladChef.Core
     public class PlayerMoveActions : MonoBehaviour
     {
         /// <summary>
-        /// saves the position of vegetables on the table
-        /// </summary>
-        [SerializeField] private List<Transform> veggies;
-
-        /// <summary>
         /// saves the position of customers on the table
         /// </summary>
         [SerializeField] private List<Transform> customers;
@@ -20,6 +15,14 @@ namespace SaladChef.Core
         /// </summary>
         [SerializeField] private Transform kitchen;
 
+        /// <summary>
+        /// ref to veggies store
+        /// </summary>
+        private VegetableStore _store = null;
+
+        /// <summary>
+        /// player current state
+        /// </summary>
         private State _state;
 
         private void OnEnable()
@@ -32,6 +35,10 @@ namespace SaladChef.Core
             if (input == null)
                 throw new System.Exception("Cannot find Input component...");
             SubscribeToInputEvents(input);
+
+            _store = FindObjectOfType<VegetableStore>();
+            if (_store == null)
+                throw new System.Exception("Cannot find Vegetable Store...");
         }
 
         private void SubscribeToInputEvents(Input input)
@@ -46,7 +53,7 @@ namespace SaladChef.Core
         {
             print("move to table");
             var move = GetComponent<Move>();
-            move.target = veggies[index].position;
+            move.target = _store.Store[index].transform.position;
             move.ActivateMove(Enums.EState.Table);
         }
 
