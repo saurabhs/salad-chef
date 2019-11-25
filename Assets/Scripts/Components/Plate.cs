@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace SaladChef.Core
 {
@@ -7,8 +8,13 @@ namespace SaladChef.Core
         /// <summary>
         /// current vegetable in the plate
         /// null is empty plate
-        /// <summary>
+        /// </summary>
         private Vegetable _veggie = null;
+
+        /// <summary>
+        /// vegetable sprite on plate
+        /// </summary>
+        [SerializeField] private SpriteRenderer _sprite = null;
 
         public Vegetable Veggie => _veggie;
 
@@ -33,11 +39,15 @@ namespace SaladChef.Core
             if (_veggie == null)
             {
                 if (basket.Picked.Count > 0)
+                {
                     _veggie = basket.Picked.Dequeue();
+                    _sprite.sprite = _veggie.GetComponent<SpriteRenderer>().sprite;
+                }
             }
             else
             {
                 basket.Picked.Enqueue(_veggie);
+                _sprite.sprite = null;
                 _veggie = null;
             }
         }

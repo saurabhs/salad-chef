@@ -12,6 +12,11 @@ namespace SaladChef.Core
         private Move _move = null;
 
         ///<summary>
+        /// sprite object on chopping board 
+        ///<summary>
+        [SerializeField] private SpriteRenderer _image = null;
+
+        ///<summary>
         /// event tot fire when vegetable is chopped
         ///<summary>
         public OnVegetableChoppedComplete onVegetableChoppedComplete = null;
@@ -48,9 +53,11 @@ namespace SaladChef.Core
         {
             //block move
             _move.canMove = false;
+            _image.sprite = veggie.GetComponent<SpriteRenderer>().sprite;
 
             yield return new WaitForSeconds(veggie.ChopTime);
             
+            _image.sprite = null;
             onVegetableChoppedComplete.Invoke(veggie);
 
             //unblock move
