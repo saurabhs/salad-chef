@@ -5,10 +5,10 @@ namespace SaladChef.Core
 {
     public class PlayerMoveActions : MonoBehaviour
     {
-        /// <summary>
-        /// saves the position of customers on the table
-        /// </summary>
-        [SerializeField] private List<Transform> customers;
+        // /// <summary>
+        // /// saves the position of customers on the table
+        // /// </summary>
+        // [SerializeField] private List<Transform> customers;
 
         /// <summary>
         /// saves the position of kitchen/chopping board
@@ -18,7 +18,12 @@ namespace SaladChef.Core
         /// <summary>
         /// ref to veggies store
         /// </summary>
-        private VegetableStore _store = null;
+        private VegetableStore _veggieStore = null;
+
+        /// <summary>
+        /// ref to customers
+        /// </summary>
+        private CustomerStore _customerStore = null;
 
         /// <summary>
         /// player current state
@@ -36,9 +41,13 @@ namespace SaladChef.Core
                 throw new System.Exception("Cannot find Input component...");
             SubscribeToInputEvents(input);
 
-            _store = FindObjectOfType<VegetableStore>();
-            if (_store == null)
+            _veggieStore = FindObjectOfType<VegetableStore>();
+            if (_veggieStore == null)
                 throw new System.Exception("Cannot find Vegetable Store...");
+
+            _customerStore = FindObjectOfType<CustomerStore>();
+            if(_customerStore == null)
+                throw new System.Exception("Cannot find Cusotmer Store...");
         }
 
         private void SubscribeToInputEvents(Input input)
@@ -53,7 +62,7 @@ namespace SaladChef.Core
         {
             print("move to table");
             var move = GetComponent<Move>();
-            move.target = _store.Store[index].transform.position;
+            move.target = _veggieStore.Store[index].transform.position;
             move.ActivateMove(Enums.EState.Table);
         }
 
@@ -95,7 +104,7 @@ namespace SaladChef.Core
             print("move to serve");
 
             var move = GetComponent<Move>();
-            move.target = customers[index].position;
+            move.target = _customerStore.Store[index].transform.position;
             move.ActivateMove(Enums.EState.Customer);
         }
     }
