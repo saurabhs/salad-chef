@@ -22,7 +22,7 @@ namespace SaladChef.Core
         ///<summary>///
         ///time left at the moment
         ///</summary>///
-        private float _timeLeft = 0;
+        [SerializeField] private float _timeLeft = 0;
 
         ///<summary>///
         ///event invoked when the time runs out
@@ -36,7 +36,7 @@ namespace SaladChef.Core
 
         private void OnEnable()
         {
-            if(_image == null)
+            if (_image == null)
                 throw new System.Exception("Cannot find waiting timer image...");
 
             onTimeOver = new OnTimeOver();
@@ -44,14 +44,14 @@ namespace SaladChef.Core
 
         private void OnDisable() => onTimeOver.RemoveAllListeners();
 
+        public void AddToTimeLeft(float change) => _timeLeft += change;
+
         public void SetWatingTime(float waitingTime)
         {
             _waitingTime = waitingTime;
-            if(_waitingTime <= 0)
+            if (_waitingTime <= 0)
                 throw new System.Exception("Time allocated not set...");
-
             _timeLeft = _waitingTime;
-
             InvokeRepeating("CountdownTimer", 0, Time.deltaTime);
         }
 
@@ -60,7 +60,7 @@ namespace SaladChef.Core
             _timeLeft -= Time.deltaTime * _waitMultiplier;
             _image.fillAmount = _timeLeft / _waitingTime;
 
-            if(_timeLeft < 0)
+            if (_timeLeft < 0)
             {
                 onTimeOver.Invoke();
                 CancelInvoke("CountdownTimer");
