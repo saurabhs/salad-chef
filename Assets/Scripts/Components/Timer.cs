@@ -41,14 +41,6 @@ namespace SaladChef.Core
             onTimeOver.RemoveAllListeners();
         }
 
-        // private void OnGUI()
-        // {
-        //     if(GUI.Button(new Rect(200, 200, 200, 200), "Restart"))
-        //     {
-        //         UnityEngine.SceneManagement.SceneManager.LoadScene("Main_old");
-        //     }
-        // }
-
         public void AddToTimeLeft(float change) => _timeLeft += change;
 
         public void SetWatingTime(float waitingTime)
