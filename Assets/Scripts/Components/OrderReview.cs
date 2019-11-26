@@ -4,6 +4,8 @@ namespace SaladChef.Core
 {
     public class OrderReview : MonoBehaviour
     {
+        [SerializeField] private int _angryScorePenalty = -50;
+
         private void OnEnable()
         {
             var timer = GetComponent<Timer>();
@@ -41,7 +43,7 @@ namespace SaladChef.Core
             
             //give angry score
             foreach(var player in angryScores.FaultedPlayers)
-                player.GetComponent<HUD>().UpdateScore(-100, false);
+                player.GetComponent<HUD>().UpdateScore(_angryScorePenalty, false);
 
             MoveOut();
         }

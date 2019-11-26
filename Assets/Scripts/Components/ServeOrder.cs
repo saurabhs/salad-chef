@@ -6,6 +6,8 @@ namespace SaladChef.Core
 {
     public class ServeOrder : MonoBehaviour
     {
+        [SerializeField] private int _discardScorePenalty = -25;
+
         private List<Vegetable> _salad = new List<Vegetable>();
         public string Order {
             get {
@@ -64,8 +66,7 @@ namespace SaladChef.Core
             if (hud == null)
                 throw new System.Exception("Cannot find HD compnent...");
 
-            //TODO: add proper scoring
-            hud.UpdateScore(-50, false);
+            hud.UpdateScore(_discardScorePenalty, false);
         }
     }
 }
