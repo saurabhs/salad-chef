@@ -5,6 +5,9 @@ namespace SaladChef.Core
 {
     public class AngryScore : MonoBehaviour
     {
+        /// <summary>
+        /// list of players who have served  wrong order to customer
+        /// </summary>
         private List<GameObject> _faultedPlayers = new List<GameObject>();
 
         public List<GameObject> FaultedPlayers => _faultedPlayers;
