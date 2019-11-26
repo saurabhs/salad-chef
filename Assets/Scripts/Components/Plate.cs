@@ -38,15 +38,15 @@ namespace SaladChef.Core
 
             if (_veggie == null)
             {
-                if (basket.Picked.Count > 0)
+                if (basket.Size > 0)
                 {
-                    _veggie = basket.Picked.Dequeue();
+                    _veggie = basket.TakeFromBasket();
                     _sprite.sprite = _veggie.GetComponent<SpriteRenderer>().sprite;
                 }
             }
             else
             {
-                basket.Picked.Enqueue(_veggie);
+                basket.AddToBasket(_veggie);
                 _sprite.sprite = null;
                 _veggie = null;
             }

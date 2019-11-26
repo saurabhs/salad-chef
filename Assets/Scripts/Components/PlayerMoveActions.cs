@@ -77,14 +77,14 @@ namespace SaladChef.Core
                 throw new System.Exception("Cannot find Basket...");
 
             //empty basket
-            if (basket.Picked.Count == 0)
+            if (basket.Size == 0)
                 return;
 
             var chopping = GetComponent<ChopVegetable>();
             if (chopping == null)
                 throw new System.Exception("Cannot find Chopping component...");
 
-            chopping.ActivateChopping(basket.Picked.Dequeue());
+            chopping.ActivateChopping(basket.TakeFromBasket());
         }
 
         private void Serve(int index)
