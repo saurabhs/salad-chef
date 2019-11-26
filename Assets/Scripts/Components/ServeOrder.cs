@@ -35,7 +35,15 @@ namespace SaladChef.Core
             {
                 var customer = other.GetComponent<OrderReceiver>();
                 customer.Receive(gameObject);
+
+                //move back to kitchen after a sec
+                Invoke("MoveBackToKitchen", 1f);
             }
+        }
+
+        private void MoveBackToKitchen()
+        {
+            GetComponent<PlayerMoveActions>().MoveToKitchen();
         }
 
         private void MoveChoppedVegetableToPlate(Vegetable veggie)
