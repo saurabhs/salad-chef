@@ -60,7 +60,7 @@ namespace SaladChef.Core
             move.ActivateMove(Enums.EState.Table);
         }
 
-        private void MoveToKitchen()
+        public void MoveToKitchen()
         {
             var move = GetComponent<Move>();
             move.target = kitchen.position;
