@@ -25,6 +25,20 @@ namespace SaladChef.Core
         ///</summary>///
         private Timer _timer = null;
 
+        ///<summary>///
+        /// for displaying score for player2
+        ///</summary>///
+        [SerializeField] private bool _isPlayer2 = false;
+
+        ///<summary>///
+        /// for displaying score for player2
+        ///</summary>///
+        private string _scoreFormat = string.Empty;
+
+        ///<summary>///
+        /// for displaying score for player2
+        private string _timeFormat = string.Empty;
+
         public float Score => _score;
 
         private void OnEnable()
@@ -42,26 +56,29 @@ namespace SaladChef.Core
 
         private void InitHUD()
         {
-            _scoreText.text = $"SCORE 0";
-            _timerText.text = $"TIMER 00:00";
+            _scoreFormat = _isPlayer2 ? "{0} SCORE" : "SCORE {0}";
+            _timeFormat = _isPlayer2 ? "{0} TIMER" : "TIME {0}";
+
+            _scoreText.text = string.Format(_scoreFormat, 0);
+            _timerText.text = string.Format(_timeFormat, 0);
         }
 
         public void UpdateScore(float score, bool bonus)
         {
             _score += score + (bonus ? 100 : 0);
-            _scoreText.text = $"SCORE {_score.ToString("0")}";
+            _scoreText.text = string.Format(_scoreFormat, _score.ToString("0"));
         }
 
         public void UpdateScore(float multiplier)
         {
             _score *= multiplier;
-            _scoreText.text = $"SCORE {_score.ToString("0")}";
+            _scoreText.text = string.Format(_scoreFormat, _score.ToString("0"));
         }
-
 
         private void UpdateTimer()
         {
-            _timerText.text = $"TIMER {System.TimeSpan.FromSeconds(_timer.TimeLeft).ToString(@"mm\:ss")}";
+            _timerText.text = $"TIME {System.TimeSpan.FromSeconds(_timer.TimeLeft).ToString(@"mm\:ss")}";
+            _timerText.text = string.Format(_timeFormat, System.TimeSpan.FromSeconds(_timer.TimeLeft).ToString(@"mm\:ss"));
         }
     }
 }
