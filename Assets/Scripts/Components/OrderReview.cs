@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SaladChef.Powerups;
+using UnityEngine;
 
 namespace SaladChef.Core
 {
@@ -25,11 +26,15 @@ namespace SaladChef.Core
             var timer = GetComponent<Timer>();
             if(timer == null) 
                 throw new System.Exception("Cannot find Timer Component...");
-            
-            // removing listeners to avoid player
-            // getting -ve marks if the time runs over
-            // just before the customer is reset
+
+            // removing listeners to avoid playergetting -ve marks 
+            // if the time runs over just before the customer is reset
             timer.onTimeOver.RemoveAllListeners();
+
+            var performanceTracker = player.GetComponent<PerformanceTracker>();
+            if(performanceTracker == null)
+                throw new System.Exception("Cannot find PowerupCreator....");
+            performanceTracker.OnCorrectOrderServed();
             
             MoveOut();
         }
