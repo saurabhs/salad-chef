@@ -11,8 +11,6 @@ namespace SaladChef.Globals
         /// </summary>
         [SerializeField] private List<GameObject> _players = new List<GameObject>();
 
-        [SerializeField] private GameObject _levelOverUI = null;
-
         int count = 0;
 
         private void OnEnable()
@@ -28,14 +26,20 @@ namespace SaladChef.Globals
             count++;
             if(count == _players.Count)
             {
-                Invoke("InitiateGameOver", 1f);
+                InitiateGameOver();
             }
         }
 
         private void InitiateGameOver()
         {
             Time.timeScale = 0;
-            _levelOverUI.SetActive(false);
+
+            for(var i = 0; i < _players.Count; i++)
+            {
+                PlayerPrefs.SetInt($"Player{i + 1}Score", (int)_players[i].GetComponent<HUD>().Score);
+            }
+
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
         }
     }
 }
