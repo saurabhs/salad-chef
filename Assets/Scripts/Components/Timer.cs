@@ -10,11 +10,6 @@ namespace SaladChef.Core
     public class Timer : MonoBehaviour
     {
         ///<summary>///
-        /// progress bar image for timer
-        ///</summary>///
-        [SerializeField] private Image _image = null;
-
-        ///<summary>///
         ///stores the original wating time, used for progress basr
         ///</summary>///
         private float _waitingTime = 0;
@@ -36,12 +31,7 @@ namespace SaladChef.Core
 
         private void OnEnable()
         {
-            if (_image)
-            {
-                _image.color = Color.green;
-                var orderValidator = GetComponent<OrderValidator>();
-                orderValidator.onWrongOrderReceived.AddListener((gameObject) => { _image.color = Color.red; });
-            }
+            // print("Timer OnEnable Called -> " + gameObject.name);
 
             onTimeOver = new OnTimeOver();
         }
@@ -50,6 +40,14 @@ namespace SaladChef.Core
         {
             onTimeOver.RemoveAllListeners();
         }
+
+        // private void OnGUI()
+        // {
+        //     if(GUI.Button(new Rect(200, 200, 200, 200), "Restart"))
+        //     {
+        //         UnityEngine.SceneManagement.SceneManager.LoadScene("Main_old");
+        //     }
+        // }
 
         public void AddToTimeLeft(float change) => _timeLeft += change;
 
@@ -65,9 +63,6 @@ namespace SaladChef.Core
         private void CountdownTimer()
         {
             _timeLeft -= Time.deltaTime * _waitMultiplier;
-            if (_image)
-                _image.fillAmount = _timeLeft / _waitingTime;
-
             if (_timeLeft < 0)
             {
                 onTimeOver.Invoke();
