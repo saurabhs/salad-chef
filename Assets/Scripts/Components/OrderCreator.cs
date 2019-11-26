@@ -82,7 +82,6 @@ namespace SaladChef.Core
 
             /// strinfy
             var orderString = StringifyOrder(order);
-            orderPrint = orderString;
             onOrderPlaced.Invoke(orderString);
 
             return orderString;
@@ -101,14 +100,11 @@ namespace SaladChef.Core
                     var veggie = _store.Store[index];
                     result.Add(veggie);
                     selected.Add(index);
-                    print($"{gameObject.name} -> {selected.Count}");
                     _sprites[selected.Count - 1].sprite = veggie.GetComponent<SpriteRenderer>().sprite;
                 }
             }
             return result;
         }
-
-        public string orderPrint = "";
 
         private string StringifyOrder(List<Vegetable> veggies)
         {
