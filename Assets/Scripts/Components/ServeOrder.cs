@@ -37,12 +37,13 @@ namespace SaladChef.Core
                 customer.Receive(gameObject);
 
                 //move back to kitchen after a sec
-                Invoke("MoveBackToKitchen", 1f);
+                Invoke("MoveBackToKitchen", 0.5f);
             }
         }
 
         private void MoveBackToKitchen()
         {
+            _salad.Clear();
             GetComponent<PlayerMoveActions>().MoveToKitchen();
         }
 
