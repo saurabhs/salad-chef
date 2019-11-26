@@ -32,8 +32,6 @@ namespace SaladChef.Globals
 
         private void InitiateGameOver()
         {
-            Time.timeScale = 0;
-
             for(var i = 0; i < _players.Count; i++)
             {
                 PlayerPrefs.SetInt($"Player{i + 1}Score", (int)_players[i].GetComponent<HUD>().Score);
