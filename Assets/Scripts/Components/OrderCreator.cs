@@ -29,7 +29,7 @@ namespace SaladChef.Core
 
         /// <summary>
         /// defines the max hungry level of customer
-        /// the hungrier the player, the higher the level
+        /// the hungrier the customer, the higher the level
         /// hence higher the count of vegetables in the salad
         /// </summary>
         [SerializeField] private int _maxHungerLevel = 3;
@@ -44,6 +44,8 @@ namespace SaladChef.Core
         /// </summary>
         private VegetableStore _store = null;
 
+        [SerializeField] private List<SpriteRenderer> _sprites = new List<SpriteRenderer>();
+
         private void OnEnable()
         {
             var initiateCustomer = GetComponent<InitiateCustomer>();
@@ -55,6 +57,9 @@ namespace SaladChef.Core
             _store = FindObjectOfType<VegetableStore>();
             if (_store == null)
                 throw new System.Exception("Cannot find Vegetable Store...");
+
+            if (_maxHungerLevel > 4)
+                _maxHungerLevel = 4;
         }
 
         private void Setup()
@@ -77,6 +82,7 @@ namespace SaladChef.Core
 
             /// strinfy
             var orderString = StringifyOrder(order);
+            orderPrint = orderString;
             onOrderPlaced.Invoke(orderString);
 
             return orderString;
@@ -92,12 +98,17 @@ namespace SaladChef.Core
                 var index = Random.Range(0, _store.Store.Count);
                 if (!selected.Contains(index))
                 {
-                    result.Add(_store.Store[index]);
+                    var veggie = _store.Store[index];
+                    result.Add(veggie);
                     selected.Add(index);
+                    print($"{gameObject.name} -> {selected.Count}");
+                    _sprites[selected.Count - 1].sprite = veggie.GetComponent<SpriteRenderer>().sprite;
                 }
             }
             return result;
         }
+
+        public string orderPrint = "";
 
         private string StringifyOrder(List<Vegetable> veggies)
         {
@@ -113,7 +124,7 @@ namespace SaladChef.Core
         private float GetWaitingTime(List<Vegetable> veggies)
         {
             var time = 0f;
-            foreach(var veggie in veggies)
+            foreach (var veggie in veggies)
                 time += veggie.ChopTime;
 
             return time * _serveTimeMultiplier;
