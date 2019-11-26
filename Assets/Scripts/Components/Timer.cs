@@ -17,12 +17,12 @@ namespace SaladChef.Core
         ///<summary>///
         ///stores the original wating time, used for progress basr
         ///</summary>///
-        [SerializeField] private float _waitingTime = 0;
+        private float _waitingTime = 0;
 
         ///<summary>///
         ///time left at the moment
         ///</summary>///
-        [SerializeField] private float _timeLeft = 0;
+        private float _timeLeft = 0;
 
         ///<summary>///
         ///event invoked when the time runs out
@@ -36,13 +36,20 @@ namespace SaladChef.Core
 
         private void OnEnable()
         {
-            if (_image == null)
-                throw new System.Exception("Cannot find waiting timer image...");
+            if (_image)
+            {
+                _image.color = Color.green;
+                var orderValidator = GetComponent<OrderValidator>();
+                orderValidator.onWrongOrderReceived.AddListener((gameObject) => { _image.color = Color.red; });
+            }
 
             onTimeOver = new OnTimeOver();
         }
 
-        private void OnDisable() => onTimeOver.RemoveAllListeners();
+        private void OnDisable()
+        {
+            onTimeOver.RemoveAllListeners();
+        }
 
         public void AddToTimeLeft(float change) => _timeLeft += change;
 
@@ -58,7 +65,8 @@ namespace SaladChef.Core
         private void CountdownTimer()
         {
             _timeLeft -= Time.deltaTime * _waitMultiplier;
-            _image.fillAmount = _timeLeft / _waitingTime;
+            if (_image)
+                _image.fillAmount = _timeLeft / _waitingTime;
 
             if (_timeLeft < 0)
             {
