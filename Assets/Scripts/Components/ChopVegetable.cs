@@ -55,7 +55,12 @@ namespace SaladChef.Core
             _move.canMove = false;
             _image.sprite = veggie.GetComponent<SpriteRenderer>().sprite;
 
+            var state = GetComponent<State>();
+            state.CurrentState = Enums.EState.Chopping;
+
             yield return new WaitForSeconds(veggie.ChopTime);
+
+            state.CurrentState = Enums.EState.Kitchen;
             
             _image.sprite = null;
             onVegetableChoppedComplete.Invoke(veggie);

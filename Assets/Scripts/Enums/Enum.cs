@@ -4,6 +4,7 @@
     {
         None,
         Kitchen,
+        Chopping,
         Table,
         Customer,
         Walking,
