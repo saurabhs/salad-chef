@@ -5,6 +5,9 @@ namespace SaladChef.Core
 {
     public class OrderReview : MonoBehaviour
     {
+        /// <summary>
+        /// score penalty for serving wrong order
+        /// </summary>
         [SerializeField] private int _angryScorePenalty = -50;
 
         private void OnEnable()

@@ -50,18 +50,11 @@ namespace SaladChef.Core
         private void OnOrderReceived(GameObject player, string orderReceived, float timeRemaining, float totalTime)
         {
             if(orderReceived.Equals(_orderCreator.OrderPlaced))
-            {
                 onOrderValidated.Invoke(player, CalculateScore(timeRemaining, totalTime), timeRemaining / totalTime > 0.3f);
-            }
             else
-            {
                 onWrongOrderReceived.Invoke(player);
-            }
         }
 
-        private float CalculateScore(float timeRemaining, float totalTime)
-        {
-            return totalTime / timeRemaining;
-        }
+        private float CalculateScore(float timeRemaining, float totalTime) => totalTime / timeRemaining;
     }
 }

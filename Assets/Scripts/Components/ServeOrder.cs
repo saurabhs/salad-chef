@@ -6,9 +6,16 @@ namespace SaladChef.Core
 {
     public class ServeOrder : MonoBehaviour
     {
+        /// <summary>
+        /// score penalty on wasting food
+        /// </summary>
         [SerializeField] private int _discardScorePenalty = -25;
 
+        /// <summary>
+        /// list of chopped vetetable in the salad
+        /// </summary>
         private List<Vegetable> _salad = new List<Vegetable>();
+
         public string Order {
             get {
                 var sb = new StringBuilder();
@@ -49,10 +56,7 @@ namespace SaladChef.Core
             GetComponent<PlayerMoveActions>().MoveToKitchen();
         }
 
-        private void MoveChoppedVegetableToPlate(Vegetable veggie)
-        {
-            _salad.Add(veggie);
-        }
+        private void MoveChoppedVegetableToPlate(Vegetable veggie) => _salad.Add(veggie);
 
         private void DiscardChoppedVegetable()
         {

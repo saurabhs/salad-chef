@@ -29,17 +29,9 @@ namespace SaladChef.Core
         public float TimeLeft { get => _timeLeft; }
         public float WaitingTIme { get => _waitingTime; }
 
-        private void OnEnable()
-        {
-            // print("Timer OnEnable Called -> " + gameObject.name);
+        private void OnEnable() => onTimeOver = new OnTimeOver();
 
-            onTimeOver = new OnTimeOver();
-        }
-
-        private void OnDisable()
-        {
-            onTimeOver.RemoveAllListeners();
-        }
+        private void OnDisable() => onTimeOver.RemoveAllListeners();
 
         public void AddToTimeLeft(float change) => _timeLeft += change;
 
