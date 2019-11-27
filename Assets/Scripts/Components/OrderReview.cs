@@ -8,17 +8,22 @@ namespace SaladChef.Core
         /// <summary>
         /// score penalty for serving wrong order
         /// </summary>
+        [SerializeField] private int _noOrderServedPenalty = -20;
+
+        /// <summary>
+        /// score penalty for serving wrong order
+        /// </summary>
         [SerializeField] private int _angryScorePenalty = -50;
 
         private void OnEnable()
         {
             var timer = GetComponent<Timer>();
-            if(timer == null) 
+            if (timer == null)
                 throw new System.Exception("Cannot find Timer Component...");
             timer.onTimeOver.AddListener(OnTimeOver);
 
             var orderValidator = GetComponent<OrderValidator>();
-            if(orderValidator == null)
+            if (orderValidator == null)
                 throw new System.Exception("Cannot find OrderValidity component...");
             orderValidator.onOrderValidated.AddListener(OnOrderValidated);
         }
@@ -27,7 +32,7 @@ namespace SaladChef.Core
         {
             player.GetComponent<HUD>().UpdateScore(score, bonus);
             var timer = GetComponent<Timer>();
-            if(timer == null) 
+            if (timer == null)
                 throw new System.Exception("Cannot find Timer Component...");
 
             // removing listeners to avoid playergetting -ve marks 
@@ -35,10 +40,10 @@ namespace SaladChef.Core
             timer.onTimeOver.RemoveAllListeners();
 
             var performanceTracker = player.GetComponent<PerformanceTracker>();
-            if(performanceTracker == null)
+            if (performanceTracker == null)
                 throw new System.Exception("Cannot find PowerupCreator....");
             performanceTracker.OnCorrectOrderServed();
-            
+
             MoveOut();
         }
 
@@ -46,20 +51,34 @@ namespace SaladChef.Core
         {
             //handle players score
             var angryScores = GetComponent<AngryScore>();
-            if(angryScores == null)
+            if (angryScores == null)
                 throw new System.Exception("Cannot find AngryScore component...");
-            
+
             //give angry score
-            foreach(var player in angryScores.FaultedPlayers)
-                player.GetComponent<HUD>().UpdateScore(_angryScorePenalty, false);
+            if (angryScores.FaultedPlayers.Count > 0)
+            {
+                foreach (var player in angryScores.FaultedPlayers)
+                    player.GetComponent<HUD>().UpdateScore(_angryScorePenalty, false);
+            }
+            else
+            {
+                ///since no one served the customer, 
+                //incorrect order or otherwise, give penalty
+                var players = FindObjectsOfType<HUD>();
+                if(players.Length == 0)
+                    throw new System.Exception("No player found...");
+ 
+                foreach(var player in players)
+                    player.GetComponent<HUD>().UpdateScore(_noOrderServedPenalty, false);
+            }
 
             MoveOut();
         }
-        
+
         private void MoveOut()
         {
             var move = GetComponent<Move>();
-            if(move == null)
+            if (move == null)
                 throw new System.Exception("Canot find Move component...");
             move.target = transform.position + new Vector3(0, 3f, 0);
             move.ActivateMove(Enums.EState.Exit);
